@@ -80,7 +80,7 @@
         </div>
         </div>
     </div>
-  <script src="{{ URL::to('/js/Login/login.js') }}" defer></script> 
+  <script src="{{ URL::to('/assets/js/Login/login.js') }}" defer></script> 
 @endsection
 
 @push('js')
