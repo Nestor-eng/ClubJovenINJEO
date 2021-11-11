@@ -25,4 +25,12 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    public function archivo($archivo, $usuario){
+        if($archivo -> hasFile('ine_url')){
+            $file = $archivo -> file("ine_url");
+            $nombreArchivo = $file -> getClientOriginalName();
+            $extension = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
+            $file -> move(public_path('assets/img/pdf'), $usuario.".".$extension);
+           }
+    }
 }

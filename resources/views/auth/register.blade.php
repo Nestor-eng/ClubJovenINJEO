@@ -23,6 +23,8 @@
         <div class="col-md-4 mr-auto">
           <div class="card card-signup text-center">
             <input type="hidden" id="token">
+            <input type="hidden" id="usuario_id">
+            <input type="hidden" id="titularempresa_id">
           <!-- Empieza el primer formulario -->
             <div class="card-header " style="display:block" id="registro">
               <h4 class="card-title">{{ __('Registrarse') }}</h4>
@@ -192,6 +194,153 @@
           </div>
 
           <!-- Finaliza segundo formulario-->
+
+
+
+        
+        
+<!--           Formulario de Externo
+ -->          <div class="card-header " style="display:none" id="externo">
+ <h4 class="card-title">{{ __('Empresa') }}</h4>
+              <div class="card-body ">
+              <form method="POST">
+                @csrf
+                <div class="input-group {{ $errors->has('nombre') ? ' has-danger' : '' }}">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="now-ui-icons users_circle-08"></i>
+                    </div>
+                  </div>
+                  <input class="form-control {{ $errors->has('nombre') ? ' is-invalid' : '' }}" placeholder="{{ __('Nombre de la empresa') }}" type="text" name="nombreEmpresa" id="nombreEmpresa" onchange="CargarTipoNegocio(); CargarTipoGiro();getLocation();" onblur="this.value = this.value.toUpperCase();" required autofocus>
+                  @if ($errors->has('nombre'))
+                    <span class="invalid-feedback" style="display: block;" role="alert">
+                      <strong>{{ $errors->first('nombre') }}</strong>
+                    </span>
+                  @endif
+                </div>
+                <div class="input-group {{ $errors->has('rfc') ? ' has-danger' : '' }}">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="now-ui-icons users_circle-08"></i>
+                    </div>
+                  </div>
+                  <input class="form-control{{ $errors->has('rfc') ? ' is-invalid' : '' }}" placeholder="{{ __('rfc') }}" type="text" id="rfc" name="rfc" onblur="this.value = this.value.toUpperCase();" required>
+                 </div>
+                 @if ($errors->has('rfc'))
+                    <span class="invalid-feedback" style="display: block;" role="alert">
+                        <strong>{{ $errors->first('rfc') }}</strong>
+                    </span>
+                @endif
+                <div class="input-group {{ $errors->has('direccion') ? ' has-danger' : '' }}">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="now-ui-icons business_badge"></i>
+                    </div>
+                  </div>
+                  <input class="form-control {{ $errors->has('direccion') ? ' is-invalid' : '' }}" placeholder="{{ __('Dirección') }}" onblur="this.value = this.value.toUpperCase();" type="text" id="direccion" name="direccion" required>
+                  @if ($errors->has('direccion'))
+                    <span class="invalid-feedback" style="display: block;" role="alert">
+                      <strong>{{ $errors->first('direccion') }}</strong>
+                    </span>
+                  @endif
+                </div>
+                <div class="input-group {{ $errors->has('numero_telefonicotres') ? ' has-danger' : '' }}">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="now-ui-icons media-1_camera-compact"></i>
+                    </div>
+                  </div>
+                  <input class="form-control {{ $errors->has('numero_telefonicotres') ? ' is-invalid' : '' }}" placeholder="{{ __('Teléfono') }}" type="text" id="numero_telefonicotres" name="numero_telefonicotres" required>
+                  @if ($errors->has('numero_telefonicotres'))
+                    <span class="invalid-feedback" style="display: block;" role="alert">
+                      <strong>{{ $errors->first('numero_telefonicotres') }}</strong>
+                    </span>
+                  @endif
+                </div>
+                <div class="input-group {{ $errors->has('pagina_web') ? ' has-danger' : '' }}">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="now-ui-icons location_map-big"></i>
+                    </div>
+                  </div>
+                  <input class="form-control {{ $errors->has('pagina_web') ? ' is-invalid' : '' }}" placeholder="{{ __('Página Web') }}" type="text" id="pagina_web" name="pagina_web" required>
+                  @if ($errors->has('pagina_web'))
+                    <span class="invalid-feedback" style="display: block;" role="alert">
+                      <strong>{{ $errors->first('pagina_web') }}</strong>
+                    </span>
+                  @endif
+                </div>   
+                <div class="input-group {{ $errors->has('longitud') ? ' has-danger' : '' }}">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="now-ui-icons location_map-big"></i>
+                    </div>
+                  </div>
+                  <input class="form-control {{ $errors->has('longitud') ? ' is-invalid' : '' }}" placeholder="{{ __('Longitud') }}" type="text" id="longitud" name="longitud" required readonly="true">
+                  @if ($errors->has('longitud'))
+                    <span class="invalid-feedback" style="display: block;" role="alert">
+                      <strong>{{ $errors->first('longitud') }}</strong>
+                    </span>
+                  @endif
+                </div>
+                <div class="input-group {{ $errors->has('latitud') ? ' has-danger' : '' }}">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="now-ui-icons location_map-big"></i>
+                    </div>
+                  </div>
+                  <input class="form-control {{ $errors->has('latitud') ? ' is-invalid' : '' }}" placeholder="{{ __('Latitud') }}" type="text" id="latitud" name="latitud" required readonly="true">
+                  @if ($errors->has('latitud'))
+                    <span class="invalid-feedback" style="display: block;" role="alert">
+                      <strong>{{ $errors->first('latitud') }}</strong>
+                    </span>
+                  @endif
+                </div>
+                <div class="input-group {{ $errors->has('tipoNego') ? ' has-danger' : '' }}">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="now-ui-icons location_map-big"></i>
+                    </div>
+                  </div>
+                  
+                <select class="form-control" id="tipoNego" name="tipoNego" ></select>
+                  @if ($errors->has('tipoNego'))
+                    <span class="invalid-feedback" style="display: block;" role="alert">
+                      <strong>{{ $errors->first('tipoNego') }}</strong>
+                    </span>
+                  @endif
+                </div>
+                
+                <div class="input-group {{ $errors->has('giro') ? ' has-danger' : '' }}">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="now-ui-icons location_map-big"></i>
+                    </div>
+                  </div>
+                  
+                <select class="form-control" id="giro" name="giro" ></select>
+                  @if ($errors->has('giro'))
+                    <span class="invalid-feedback" style="display: block;" role="alert">
+                      <strong>{{ $errors->first('giro') }}</strong>
+                    </span>
+                  @endif
+                </div>
+
+                <div class="card-footer ">
+                  <button type="submit" class="btn btn-primary btn-round btn-lg" onclick="registrarExterno();">{{__('Aceptar')}}</button>
+                </div>
+              </form>
+            </div>
+            
+          </div>
+
+          <!-- Finaliza Externo-->
+
+
+
+
+
+
 
 
 

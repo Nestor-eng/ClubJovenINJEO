@@ -14,9 +14,16 @@ function loger() {
                   console.log(data)
                   console.log("Jaló")
             },
-        error: function () {
-           console.log("https://injeo-rest-server.herokuapp.com/api/auth/login") 
-           console.log("El germa es culito")
-        }
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                jsonValue = jQuery.parseJSON( XMLHttpRequest.responseText );
+                swal({
+                  type: "error",
+                  title: 'Error',
+                  text: jsonValue.errors[0].msg,             
+                })
+                console.error(textStatus);
+                console.error(errorThrown); 
+                
+            }
     })
 }

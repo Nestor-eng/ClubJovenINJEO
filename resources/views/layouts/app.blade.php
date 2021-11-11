@@ -21,6 +21,7 @@
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="{{ asset('assets') }}/demo/demo.css" rel="stylesheet" />
   <script src="https://unpkg.com/sweetalert2@7.8.2/dist/sweetalert2.all.js"></script>
+
   
 </head>
 
